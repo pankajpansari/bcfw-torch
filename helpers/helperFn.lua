@@ -3,9 +3,18 @@ local M = {}
 local nchannel = 3
 local image_size = 32
 local nclasses = 10
+
 --local featureMapSize = nclasses * nchannel * image_size * image_size
 local featureSize = 4096
 local featureMapSize = nclasses * featureSize
+
+--if data_source == 'original' then
+--	featureMapSize = nclasses * nchannel * image_size * image_size
+--	featureSize = 3072 
+--elseif data_source == 'pritish' then
+--	featureMapSize = nclasses * 4096 
+--	featureSize = 4096 
+--end
 
 local function featureVec(x, y)
 	local feature = torch.Tensor(featureMapSize):zero()
@@ -60,9 +69,11 @@ local function duality_gap(w, lambda, l, n, minitrainset_data, minitrainset_labe
 		local y = minitrainset_label[i]
 		local max_y = maxOracle(x, y, w)
 		local psi_i = featureVec(x, y) - featureVec(x, max_y)
-		ws = ws + 1/(n*lambda) * psi_i 
-		ls = ls + 1/n * loss(y, max_y)
+		ws = ws + psi_i 
+		ls = ls + loss(y, max_y)
 	end
+	ws = 1/(n*lambda) * ws 
+	ls = 1/n * ls 
 	local dualGap = (lambda * w:dot(w - ws) - l + ls)
 	return dualGap
 end
