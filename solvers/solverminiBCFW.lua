@@ -108,7 +108,7 @@ function minibatchBCFW(options, minibatchSize)
 			dualArr[numIter] = f
 			timeArr[numIter] = timer:time().real 
 			numIter = numIter + 1
-			gnuplot.pdffigure('MinibatchBCFW_CIFAR_n' .. n .. '_eps_' .. epsilon .. '_lambda_' .. lambda .. '.pdf') 
+			gnuplot.pdffigure('plots/MinibatchBCFW_CIFAR_n' .. n .. '_eps_' .. epsilon .. '_lambda_' .. lambda .. '.pdf') 
 			gnuplot.plot({'Dual', timeArr[{{1, numIter - 1}}], dualArr[{{1, numIter - 1}}], '-'} )
 			gnuplot.xlabel('Time(s)')
 			gnuplot.ylabel('Value')
@@ -134,7 +134,7 @@ function minibatchBCFW(options, minibatchSize)
 		t = t + 1
 		return t
 	end)
-	gnuplot.pdffigure('MinibatchBCFW_CIFAR_n' .. n .. '_eps_' .. epsilon .. '_lambda_' .. lambda .. '.pdf') 
+	gnuplot.pdffigure('plots/MinibatchBCFW_CIFAR_n' .. n .. '_eps_' .. epsilon .. '_lambda_' .. lambda .. '.pdf') 
 	gnuplot.plot({'Dual', timeArr[{{1, numIter - 1}}], dualArr[{{1, numIter - 1}}], '-'} )
 	gnuplot.xlabel('Time(s)')
 	gnuplot.ylabel('Value')

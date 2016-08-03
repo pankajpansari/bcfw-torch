@@ -9,7 +9,7 @@ local solverFW = require("solvers.solverFW")
 local solverBCFW = require("solvers.solverBCFW")
 local solverminiBCFW = require("solvers.solverminiBCFW")
 eps = torch.pow(2, -52)
-trainset_size = 5000
+trainset_size = 50
 debug_flag = 0
 data_source = 'pritish'
 --torch.manualSeed(123)
@@ -95,7 +95,7 @@ elseif params.method == 1 then
 elseif params.method == 2 then
 	timeArr3, dualArr3, numIter3 = solverminiBCFW.minibatchBCFW(options, 10)
 elseif params.method == 3 then
-	timeArr1, dualArr1, numIter1 = solverFW.FW(options)
+--	timeArr1, dualArr1, numIter1 = solverFW.FW(options)
 	timer = torch.Timer()
 	timeArr2, dualArr2, numIter2 = solverBCFW.BCFW(options)
 	timer = torch.Timer()
@@ -107,7 +107,7 @@ end
 print("Plotting")
 gnuplot.pdffigure('plots/comparison.pdf') 
 gnuplot.plot(
-{'FW', timeArr1[{{1, numIter1 - 1}}], dualArr1[{{1, numIter1 - 1}}], '-'},
+--{'FW', timeArr1[{{1, numIter1 - 1}}], dualArr1[{{1, numIter1 - 1}}], '-'},
 {'BCFW', timeArr2[{{1, numIter2 - 1}}], dualArr2[{{1, numIter2 - 1}}], '-'},
 {'miniBCFW', timeArr3[{{1, numIter3 - 1}}], dualArr3[{{1, numIter3 - 1}}], '-'}
 )

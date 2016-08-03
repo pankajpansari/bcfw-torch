@@ -67,7 +67,7 @@ local function FW(options)
 			dualArr[numIter] = f
 			timeArr[numIter] = timer:time().real
 			numIter = numIter + 1
-			gnuplot.pdffigure('FW_CIFAR_n' .. n .. '_eps_' .. epsilon .. '_lambda_' .. lambda .. '.pdf') 
+			gnuplot.pdffigure('plots/FW_CIFAR_n' .. n .. '_eps_' .. epsilon .. '_lambda_' .. lambda .. '.pdf') 
 			gnuplot.plot({'Dual', timeArr[{{1, numIter - 1}}], dualArr[{{1, numIter - 1}}], '-'} )
 			gnuplot.xlabel('Time(s)')
 			gnuplot.ylabel('Value')
@@ -93,7 +93,7 @@ local function FW(options)
 		t = t + 1
 		return t
 	end)
-	gnuplot.pdffigure('FW_CIFAR_n' .. n .. '_eps_' .. epsilon .. '_lambda_' .. lambda .. '.pdf') 
+	gnuplot.pdffigure('plots/FW_CIFAR_n' .. n .. '_eps_' .. epsilon .. '_lambda_' .. lambda .. '.pdf') 
 	gnuplot.plot(
 --	{'Primal', iterArr, primalArr[{{1, numIter - 1}}]},
 	{'Dual', timeArr[{{1, numIter - 1}}], dualArr[{{1, numIter - 1}}], '-'})
